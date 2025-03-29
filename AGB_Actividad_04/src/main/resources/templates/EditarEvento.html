@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editar Evento</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-primary">Editar Evento</h1>
+
+        <form th:action="@{/app/producto/editar}" th:method="post" th:object="${evento}" class="row g-3">
+            
+            <!-- ID del Evento (oculto) -->
+            <input type="hidden" th:field="*{idEvento}">
+
+            <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" th:field="*{nombre}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="estado" class="form-label">Estado</label>
+                <select name="estado" id="estado" class="form-select" th:field="*{estado}">
+                    <option value="ACEPTADO">Aceptado</option>
+                    <option value="CANCELADO">Cancelado</option>
+                    <option value="TERMINADO">Terminado</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="destacado" class="form-label">Destacado</label>
+                <select name="destacado" id="destacado" class="form-select" th:field="*{destacado}">
+                    <option value="S">Sí</option>
+                    <option value="N">No</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="aforoMaximo" class="form-label">Aforo Máximo</label>
+                <input type="number" class="form-control" id="aforoMaximo" th:field="*{aforoMaximo}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="precio" class="form-label">Precio</label>
+                <input type="number" class="form-control" id="precio" th:field="*{precio}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+                <input type="date" class="form-control" id="fechaInicio" th:field="*{fechaInicio}">
+            </div>
+
+			<div class="col-md-6">
+				<label for="direccion" class="form-label">Dirección</label> 
+				<input type="text" class="form-control" id="direccion" name="direccion" th:field="*{direccion}">
+			</div>
+
+
+			<div class="col-md-6">
+				<label for="duracion" class="form-label">Duración (en días)</label>
+				<input type="number" class="form-control" id="duracion" name="duracion" th:field="*{duracion}" min="1">
+			</div>
+
+            <div class="col-md-6">
+                <label for="tipo" class="form-label">Tipo de Evento</label>
+                <select name="tipo" id="tipo" class="form-select" th:field="*{tipo.idTipo}">
+                    <option th:each="tipo : ${tipos}" th:value="${tipo.idTipo}" th:text="${tipo.nombre}"></option>
+                </select>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <a th:href="@{/}" class="btn btn-secondary">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>
